@@ -11,8 +11,7 @@ passport.use(
       secretOrKey: process.env.JWT_SECRET,
     },
     function (jwtPayload, done) {
-      console.log({ jwtPayload });
-      done(null, true);
+      done(null, jwtPayload);
     }
   )
 );

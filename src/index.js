@@ -9,6 +9,7 @@ const logger = require("./config/logger");
 const passport = require("passport");
 require("./middlewares/passsport-local.middleware");
 require("./middlewares/passport-jwt.middleware");
+const usersRoutes = require("./routes/users.route");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(passport.initialize());
 // Routes
 app.get("/", (req, res) => res.json({ message: "Api is running" }));
 app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
 
 const port = process.env.PORT;
 

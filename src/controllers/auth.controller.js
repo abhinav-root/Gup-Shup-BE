@@ -17,7 +17,6 @@ const signup = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     console.log({ firstName, lastName, email, password });
     const hashedPassword = await bcrypt.hash(password, 12);
-    // console.log({ hashedPassword });
     const user = new User({
       firstName,
       lastName,
@@ -25,7 +24,11 @@ const signup = async (req, res) => {
       password: hashedPassword,
     });
     await user.save();
-    return res.json(user);
+    return res.json({
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    });
   } catch (err) {
     logger.error(err.message);
     return res.status(500).json(err);
